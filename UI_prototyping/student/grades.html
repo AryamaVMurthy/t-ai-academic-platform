@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Performance - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .course-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .course-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .course-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .grade-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .grade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .grade-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .grade-circle-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-color) 0% var(--percentage), transparent var(--percentage) 100%);
+            transform: rotate(-90deg);
+            z-index: -1;
+        }
+        
+        .grade-percent {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .feedback-section {
+            margin-top: 1rem;
+            background-color: rgba(123, 104, 238, 0.05);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .question-grade {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .question-grade:last-child {
+            border-bottom: none;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .topic-progress {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lecture-archive.html" class="sidebar-link">
+                <i class="fas fa-book"></i> Lecture Archive
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-chart-bar"></i> My Performance
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>My Performance</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="performance-overview mb-3">
+                <div class="card">
+                    <h2>Overall Performance</h2>
+                    <div class="grid grid-cols-3">
+                        <div style="text-align: center;">
+                            <div class="grade-circle" style="--percentage: 75%;">
+                                <div class="grade-circle-fill"></div>
+                                <span class="grade-percent">75%</span>
+                                <span>Overall</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="mb-1">Strengths</h4>
+                            <ul style="list-style: inside; padding-left: 1rem;">
+                                <li>Algorithm Implementation</li>
+                                <li>Data Structure Concepts</li>
+                                <li>Neural Network Theory</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="mb-1">Areas for Improvement</h4>
+                            <ul style="list-style: inside; padding-left: 1rem;">
+                                <li>Network Protocols</li>
+                                <li>Complexity Analysis</li>
+                                <li>Distributed Systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-tabs">
+                <div class="course-tab active">Data Structures & Algorithms</div>
+                <div class="course-tab">Machine Learning Fundamentals</div>
+                <div class="course-tab">Computer Networks</div>
+                <div class="course-tab">All Courses</div>
+            </div>
+            
+            <div class="performance-details">
+                <div class="grid grid-cols-2 mb-3">
+                    <div class="card grade-card">
+                        <h3>Course Progress</h3>
+                        <div class="chart-container">
+                            <img src="https://via.placeholder.com/600x300" alt="Performance chart" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="topic-list">
+                            <div class="topic-progress">
+                                <div class="flex flex-between mb-1">
+                                    <h4>Graph Algorithms</h4>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div class="topic-progress">
+                                <div class="flex flex-between mb-1">
+                                    <h4>Dynamic Programming</h4>
+                                    <span>70%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <div class="topic-progress">
+                                <div class="flex flex-between mb-1">
+                                    <h4>Tree Data Structures</h4>
+                                    <span>92%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: 92%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Latest Feedback</h3>
+                        <div class="feedback-section">
+                            <h4>Binary Search Tree Implementation</h4>
+                            <p>Graded: June 10, 2023</p>
+                            <div class="grade-header">
+                                <span class="badge success">92%</span>
+                                <span>Excellent</span>
+                            </div>
+                            <p><strong>Feedback:</strong> Your implementation of the BST was very efficient and well-documented. The balancing algorithm was particularly well implemented. Consider adding more edge case handling for future improvements.</p>
+                            
+                            <div style="margin-top: 1rem;">
+                                <h5>Question Breakdown</h5>
+                                <div class="question-grade">
+                                    <span>Q1: BST Implementation</span>
+                                    <span class="badge success">95%</span>
+                                </div>
+                                <div class="question-grade">
+                                    <span>Q2: Tree Traversal</span>
+                                    <span class="badge success">90%</span>
+                                </div>
+                                <div class="question-grade">
+                                    <span>Q3: Balancing Algorithm</span>
+                                    <span class="badge success">88%</span>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 1rem; text-align: right;">
+                                <button class="btn secondary">Request Clarification</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3">
+                    <h3>Assignment History</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <th style="text-align: left; padding: 1rem;">Assignment</th>
+                                <th style="text-align: center; padding: 1rem;">Submission Date</th>
+                                <th style="text-align: center; padding: 1rem;">Grade</th>
+                                <th style="text-align: center; padding: 1rem;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem;">Binary Search Tree Implementation</td>
+                                <td style="text-align: center; padding: 1rem;">June 8, 2023</td>
+                                <td style="text-align: center; padding: 1rem;"><span class="badge success">92%</span></td>
+                                <td style="text-align: center; padding: 1rem;"><button class="btn secondary" style="padding: 0.5rem;">View</button></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem;">Sorting Algorithms Analysis</td>
+                                <td style="text-align: center; padding: 1rem;">May 25, 2023</td>
+                                <td style="text-align: center; padding: 1rem;"><span class="badge success">88%</span></td>
+                                <td style="text-align: center; padding: 1rem;"><button class="btn secondary" style="padding: 0.5rem;">View</button></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem;">Heap Data Structure</td>
+                                <td style="text-align: center; padding: 1rem;">May 12, 2023</td>
+                                <td style="text-align: center; padding: 1rem;"><span class="badge warning">75%</span></td>
+                                <td style="text-align: center; padding: 1rem;"><button class="btn secondary" style="padding: 0.5rem;">View</button></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem;">Linked List Implementation</td>
+                                <td style="text-align: center; padding: 1rem;">April 30, 2023</td>
+                                <td style="text-align: center; padding: 1rem;"><span class="badge success">95%</span></td>
+                                <td style="text-align: center; padding: 1rem;"><button class="btn secondary" style="padding: 0.5rem;">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="card">
+                    <h3>Learning Insights</h3>
+                    <div class="grid grid-cols-3 mb-3">
+                        <div class="card" style="text-align: center;">
+                            <i class="fas fa-book-reader" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                            <h4>24</h4>
+                            <p>Lectures Viewed</p>
+                        </div>
+                        <div class="card" style="text-align: center;">
+                            <i class="fas fa-tasks" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                            <h4>12</h4>
+                            <p>Assignments Completed</p>
+                        </div>
+                        <div class="card" style="text-align: center;">
+                            <i class="fas fa-comment-alt" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                            <h4>48</h4>
+                            <p>Learning Assistant Interactions</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="mb-2">Recommended Resources Based on Your Performance</h4>
+                        <div class="grid grid-cols-2">
+                            <div class="card">
+                                <h5>Advanced Graph Algorithms</h5>
+                                <p>Strengthen your understanding of complex graph problems</p>
+                                <button class="btn secondary">View Resources</button>
+                            </div>
+                            <div class="card">
+                                <h5>Complexity Analysis Deep Dive</h5>
+                                <p>Improve your skills in analyzing algorithm complexity</p>
+                                <button class="btn secondary">View Resources</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Learning Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I notice you're looking at your performance in Data Structures. You're doing great with Tree implementations! Would you like some additional resources on Graph Algorithms to further improve your skills?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Yes, please recommend some resources for Graph Algorithms</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>Here are some recommended resources:</p>
+                <ul style="list-style: inside; padding-left: 10px;">
+                    <li><a href="#">Advanced Graph Algorithms - Video Series</a></li>
+                    <li><a href="#">Practice Problems on Shortest Path Algorithms</a></li>
+                    <li><a href="#">Article: Optimizing Dijkstra's Algorithm</a></li>
+                </ul>
+                <p>Would you like me to schedule a review session for these topics?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

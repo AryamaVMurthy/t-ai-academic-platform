@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grading - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .grading-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .grading-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .grading-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .submission-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-item {
+            flex: 1;
+        }
+        
+        .submission-preview {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .question-section {
+            background-color: rgba(123, 104, 238, 0.05);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .grading-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .grade-input {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .grade-input input {
+            width: 80px;
+            margin-bottom: 0;
+        }
+        
+        .feedback-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feedback-option {
+            background-color: var(--secondary-bg);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .feedback-option:hover {
+            background-color: rgba(123, 104, 238, 0.1);
+        }
+        
+        .ocr-compare {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .ocr-compare > div {
+            flex: 1;
+        }
+        
+        .challenge-section {
+            background-color: rgba(244, 67, 54, 0.05);
+            border-left: 3px solid var(--error-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .grading-criteria {
+            margin-bottom: 1rem;
+        }
+        
+        .criteria-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .criteria-slider {
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lectures.html" class="sidebar-link">
+                <i class="fas fa-video"></i> Lectures
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <i class="fas fa-chart-line"></i> Analytics
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-check-circle"></i> Grading
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Grading</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Professor profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="grading-tabs">
+                <div class="grading-tab active">New Submissions (15)</div>
+                <div class="grading-tab">Grading Challenges (3)</div>
+                <div class="grading-tab">Graded (27)</div>
+                <div class="grading-tab">All Assignments</div>
+            </div>
+
+            <div class="submission-info mb-3">
+                <div class="card">
+                    <div class="flex flex-between">
+                        <div>
+                            <h2>Dijkstra's Algorithm</h2>
+                            <p>Data Structures & Algorithms | Due: June 20, 2023</p>
+                            <p>Student: Alex Johnson | Submitted: June 15, 2023</p>
+                        </div>
+                        <div>
+                            <button class="btn secondary mb-1" style="width: 100%;">View Rubric</button>
+                            <button class="btn secondary" style="width: 100%;">View Assignment Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 mb-3">
+                <div>
+                    <div class="card mb-3">
+                        <h3>Submission Overview</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <h4>Original Handwritten Submission</h4>
+                            <div class="submission-preview">
+                                <img src="https://via.placeholder.com/800x600" alt="Handwritten submission" style="width: 100%;">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4>OCR Converted Text</h4>
+                            <div class="submission-preview">
+                                <p>Implementation of Dijkstra's Algorithm:</p>
+                                <p>1. Initialize distance array with infinity for all vertices except the source, which is 0.</p>
+                                <p>2. Initialize a priority queue with the source vertex.</p>
+                                <p>3. While priority queue is not empty:</p>
+                                <p>   a. Extract vertex with minimum distance (u)</p>
+                                <p>   b. For each adjacent vertex (v) of u:</p>
+                                <p>      i. If dist[u] + weight(u,v) < dist[v]:</p>
+                                <p>         - Update dist[v] = dist[u] + weight(u,v)</p>
+                                <p>         - Insert v into priority queue</p>
+                                <p>4. Return the distance array</p>
+                                <p>Time Complexity: O(E log V) where E is the number of edges and V is the number of vertices.</p>
+                                <p>Space Complexity: O(V) for the distance array and priority queue.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card mb-3">
+                        <h3>Grading</h3>
+                        <div class="question-section">
+                            <div class="grading-header">
+                                <h4>Question 1: Graph Implementation</h4>
+                                <div class="grade-input">
+                                    <input type="number" min="0" max="100" value="85">
+                                    <span>/ 100</span>
+                                </div>
+                            </div>
+                            
+                            <div class="grading-criteria mb-2">
+                                <h5>Grading Criteria</h5>
+                                <div class="criteria-item">
+                                    <span>Correctness:</span>
+                                    <input type="range" min="0" max="100" value="90" class="criteria-slider">
+                                    <span>90%</span>
+                                </div>
+                                <div class="criteria-item">
+                                    <span>Efficiency:</span>
+                                    <input type="range" min="0" max="100" value="85" class="criteria-slider">
+                                    <span>85%</span>
+                                </div>
+                                <div class="criteria-item">
+                                    <span>Code clarity:</span>
+                                    <input type="range" min="0" max="100" value="80" class="criteria-slider">
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5>Feedback</h5>
+                                <div class="feedback-options mb-2">
+                                    <span class="feedback-option">Good understanding</span>
+                                    <span class="feedback-option">Correct approach</span>
+                                    <span class="feedback-option">Needs optimization</span>
+                                </div>
+                                <textarea placeholder="Add detailed feedback here..." rows="4"></textarea>
+                            </div>
+                            
+                            <div style="margin-top: 1rem;">
+                                <h5>AI-Generated Feedback</h5>
+                                <div class="submission-preview">
+                                    <p>The implementation shows a good understanding of the graph representation required for Dijkstra's algorithm. The adjacency list structure is appropriate and efficient.</p>
+                                    <p>Areas for improvement:</p>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li>Consider using a more efficient data structure for the priority queue</li>
+                                        <li>Edge cases like disconnected graphs could be handled more explicitly</li>
+                                    </ul>
+                                </div>
+                                <button class="btn secondary" style="margin-top: 0.5rem;">Use AI Feedback</button>
+                            </div>
+                        </div>
+                        
+                        <div class="question-section">
+                            <div class="grading-header">
+                                <h4>Question 2: Dijkstra's Algorithm</h4>
+                                <div class="grade-input">
+                                    <input type="number" min="0" max="100" value="92">
+                                    <span>/ 100</span>
+                                </div>
+                            </div>
+                            
+                            <div class="grading-criteria mb-2">
+                                <h5>Grading Criteria</h5>
+                                <div class="criteria-item">
+                                    <span>Correctness:</span>
+                                    <input type="range" min="0" max="100" value="95" class="criteria-slider">
+                                    <span>95%</span>
+                                </div>
+                                <div class="criteria-item">
+                                    <span>Efficiency:</span>
+                                    <input type="range" min="0" max="100" value="90" class="criteria-slider">
+                                    <span>90%</span>
+                                </div>
+                                <div class="criteria-item">
+                                    <span>Code clarity:</span>
+                                    <input type="range" min="0" max="100" value="90" class="criteria-slider">
+                                    <span>90%</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5>Feedback</h5>
+                                <textarea placeholder="Add detailed feedback here..." rows="4">Excellent implementation of Dijkstra's algorithm. The pseudocode is well-structured and demonstrates a clear understanding of the algorithm. The time and space complexity analysis is accurate.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="question-section">
+                            <div class="grading-header">
+                                <h4>Question 3: Time Complexity Analysis</h4>
+                                <div class="grade-input">
+                                    <input type="number" min="0" max="100" value="88">
+                                    <span>/ 100</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5>Feedback</h5>
+                                <textarea placeholder="Add detailed feedback here..." rows="4">Good time complexity analysis. The explanation of O(E log V) is correct. Could have elaborated more on how the priority queue operations contribute to this complexity.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <div class="flex flex-between mb-2">
+                                <h4>Overall Grade: 88%</h4>
+                                <div class="badge success">Excellent</div>
+                            </div>
+                            
+                            <div>
+                                <h5>Overall Feedback</h5>
+                                <textarea placeholder="Add overall feedback here..." rows="4">Overall, the submission demonstrates a strong understanding of Dijkstra's algorithm and graph implementations. The pseudocode is accurate and well-structured. Some areas for improvement include handling edge cases and optimizing the priority queue implementation. Great job!</textarea>
+                            </div>
+                            
+                            <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                                <button class="btn secondary">Save Draft</button>
+                                <button class="btn">Submit Grading</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grading-navigation">
+                <div class="card">
+                    <div class="flex flex-between">
+                        <button class="btn secondary"><i class="fas fa-arrow-left"></i> Previous Submission</button>
+                        <div>
+                            <span>Submission 3 of 15</span>
+                        </div>
+                        <button class="btn secondary">Next Submission <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Teaching Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I've analyzed this submission and found that it's quite similar to the highest-scoring submissions from last semester. Would you like me to pull up those examples for comparison?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Yes, that would be helpful. Also, what are common mistakes students make in this assignment?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I'll retrieve those examples for you.</p>
+                <p>Common mistakes in Dijkstra's algorithm implementations include:</p>
+                <ul style="list-style: inside; padding-left: 10px;">
+                    <li>Not initializing the distance array correctly</li>
+                    <li>Forgetting to handle visited nodes</li>
+                    <li>Incorrect priority queue implementations</li>
+                    <li>Not accounting for disconnected graphs</li>
+                    <li>Misunderstanding the relaxation step</li>
+                </ul>
+                <p>This student has avoided most of these issues, particularly showing good understanding of the relaxation step.</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html>

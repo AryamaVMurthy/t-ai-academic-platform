@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Dashboard - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lectures.html" class="sidebar-link">
+                <i class="fas fa-video"></i> Lectures
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <i class="fas fa-chart-line"></i> Analytics
+            </a>
+            <a href="grading.html" class="sidebar-link">
+                <i class="fas fa-check-circle"></i> Grading
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Dashboard</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Professor profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="welcome-section mb-3">
+                <div class="card">
+                    <div class="flex flex-between">
+                        <div>
+                            <h2>Welcome back, Dr. Johnson!</h2>
+                            <p>You have 15 new submissions and 3 grading challenges to review.</p>
+                        </div>
+                        <button class="btn">Create New Assignment</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-section mb-3">
+                <h3>Course Overview</h3>
+                <div class="grid grid-cols-3">
+                    <div class="card">
+                        <div class="flex mb-1">
+                            <i class="fas fa-book" style="margin-right: 10px; color: var(--accent-color);"></i>
+                            <h4>Data Structures & Algorithms</h4>
+                        </div>
+                        <p>Students: 45</p>
+                        <p>Avg. Performance: 78%</p>
+                        <button class="btn secondary" style="margin-top: 10px;">Manage Course</button>
+                    </div>
+                    <div class="card">
+                        <div class="flex mb-1">
+                            <i class="fas fa-brain" style="margin-right: 10px; color: var(--accent-color);"></i>
+                            <h4>Machine Learning Fundamentals</h4>
+                        </div>
+                        <p>Students: 38</p>
+                        <p>Avg. Performance: 82%</p>
+                        <button class="btn secondary" style="margin-top: 10px;">Manage Course</button>
+                    </div>
+                    <div class="card">
+                        <div class="flex mb-1">
+                            <i class="fas fa-network-wired" style="margin-right: 10px; color: var(--accent-color);"></i>
+                            <h4>Computer Networks</h4>
+                        </div>
+                        <p>Students: 32</p>
+                        <p>Avg. Performance: 75%</p>
+                        <button class="btn secondary" style="margin-top: 10px;">Manage Course</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity-section mb-3">
+                <div class="flex flex-between mb-2">
+                    <h3>Recent Activity</h3>
+                    <a href="#">View All</a>
+                </div>
+                <div class="card">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem; width: 40px;">
+                                    <i class="fas fa-upload" style="color: var(--accent-color);"></i>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <p>15 new submissions for <strong>Dijkstra's Algorithm</strong></p>
+                                    <p style="color: var(--secondary-text);">Data Structures & Algorithms</p>
+                                </td>
+                                <td style="padding: 1rem; text-align: right; color: var(--secondary-text);">
+                                    10 minutes ago
+                                </td>
+                                <td style="padding: 1rem; width: 120px; text-align: right;">
+                                    <button class="btn secondary" style="padding: 0.5rem;">Review</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem; width: 40px;">
+                                    <i class="fas fa-flag" style="color: #f44336;"></i>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <p>3 grading challenges for <strong>Neural Networks</strong></p>
+                                    <p style="color: var(--secondary-text);">Machine Learning Fundamentals</p>
+                                </td>
+                                <td style="padding: 1rem; text-align: right; color: var(--secondary-text);">
+                                    2 hours ago
+                                </td>
+                                <td style="padding: 1rem; width: 120px; text-align: right;">
+                                    <button class="btn secondary" style="padding: 0.5rem;">Review</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 1rem; width: 40px;">
+                                    <i class="fas fa-video" style="color: var(--success-color);"></i>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <p>Lecture recording processed: <strong>TCP/IP Protocol</strong></p>
+                                    <p style="color: var(--secondary-text);">Computer Networks</p>
+                                </td>
+                                <td style="padding: 1rem; text-align: right; color: var(--secondary-text);">
+                                    Yesterday
+                                </td>
+                                <td style="padding: 1rem; width: 120px; text-align: right;">
+                                    <button class="btn secondary" style="padding: 0.5rem;">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; width: 40px;">
+                                    <i class="fas fa-chart-bar" style="color: var(--accent-color);"></i>
+                                </td>
+                                <td style="padding: 1rem;">
+                                    <p>Performance report available: <strong>Mid-term Assessment</strong></p>
+                                    <p style="color: var(--secondary-text);">All Courses</p>
+                                </td>
+                                <td style="padding: 1rem; text-align: right; color: var(--secondary-text);">
+                                    2 days ago
+                                </td>
+                                <td style="padding: 1rem; width: 120px; text-align: right;">
+                                    <button class="btn secondary" style="padding: 0.5rem;">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 mb-3">
+                <div class="card">
+                    <div class="flex flex-between mb-2">
+                        <h3>Upcoming Lectures</h3>
+                        <a href="lectures.html">Manage</a>
+                    </div>
+                    <ul style="list-style: none;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #333;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>Advanced Sorting Algorithms</h4>
+                                    <p>Data Structures & Algorithms | Tomorrow, 10:00 AM</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">Prepare</button>
+                            </div>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #333;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>Convolutional Neural Networks</h4>
+                                    <p>Machine Learning Fundamentals | June 18, 1:30 PM</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">Prepare</button>
+                            </div>
+                        </li>
+                        <li style="padding: 0.75rem 0;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>Network Security Protocols</h4>
+                                    <p>Computer Networks | June 19, 3:00 PM</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">Prepare</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="flex flex-between mb-2">
+                        <h3>Pending Assignments</h3>
+                        <a href="assignments.html">Manage</a>
+                    </div>
+                    <ul style="list-style: none;">
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #333;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>Dijkstra's Algorithm</h4>
+                                    <p>Data Structures & Algorithms | Due: June 20</p>
+                                    <div class="progress-bar" style="margin-top: 0.5rem;">
+                                        <div class="progress-bar-fill" style="width: 60%;"></div>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: var(--secondary-text);">27/45 submissions</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">View</button>
+                            </div>
+                        </li>
+                        <li style="padding: 0.75rem 0; border-bottom: 1px solid #333;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>Backpropagation Implementation</h4>
+                                    <p>Machine Learning Fundamentals | Due: June 18</p>
+                                    <div class="progress-bar" style="margin-top: 0.5rem;">
+                                        <div class="progress-bar-fill" style="width: 45%;"></div>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: var(--secondary-text);">17/38 submissions</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">View</button>
+                            </div>
+                        </li>
+                        <li style="padding: 0.75rem 0;">
+                            <div class="flex flex-between">
+                                <div>
+                                    <h4>TCP/IP Protocol Analysis</h4>
+                                    <p>Computer Networks | Due: June 25</p>
+                                    <div class="progress-bar" style="margin-top: 0.5rem;">
+                                        <div class="progress-bar-fill" style="width: 15%;"></div>
+                                    </div>
+                                    <p style="font-size: 0.8rem; color: var(--secondary-text);">5/32 submissions</p>
+                                </div>
+                                <button class="btn secondary" style="padding: 0.5rem;">View</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 mb-3">
+                <div class="card" style="text-align: center;">
+                    <h3 class="mb-2">Assignment Completion</h3>
+                    <div style="width: 150px; height: 150px; margin: 0 auto 1rem;">
+                        <img src="https://via.placeholder.com/150" alt="Completion chart" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <p>Overall completion rate: <strong>87%</strong></p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 class="mb-2">Grade Distribution</h3>
+                    <div style="width: 150px; height: 150px; margin: 0 auto 1rem;">
+                        <img src="https://via.placeholder.com/150" alt="Grade distribution chart" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <p>Average grade: <strong>B+ (85%)</strong></p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 class="mb-2">Student Engagement</h3>
+                    <div style="width: 150px; height: 150px; margin: 0 auto 1rem;">
+                        <img src="https://via.placeholder.com/150" alt="Engagement chart" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    </div>
+                    <p>Active students: <strong>92%</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Teaching Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>Good morning, Dr. Johnson. I've noticed you have 15 new submissions for the Dijkstra's Algorithm assignment. Would you like me to prepare a preliminary analysis of the submissions?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Yes, that would be helpful. Also, remind me what topics I should cover in tomorrow's lecture.</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I'll begin analyzing the Dijkstra's Algorithm submissions and will notify you when it's ready.</p>
+                <p>For tomorrow's Advanced Sorting Algorithms lecture, your plan includes covering:</p>
+                <ul style="list-style: inside; padding-left: 10px;">
+                    <li>Quick Sort optimization techniques</li>
+                    <li>Merge Sort variants</li>
+                    <li>Hybrid sorting algorithms</li>
+                    <li>Parallel sorting approaches</li>
+                </ul>
+                <p>Your lecture notes and slides are already uploaded to the system.</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

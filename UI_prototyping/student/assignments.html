@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .assignment-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .assignment-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .assignment-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .assignment-item {
+            margin-bottom: 1rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .assignment-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .assignment-details {
+            padding: 1.5rem;
+            border-top: 1px solid #333;
+            display: none;
+        }
+        
+        .assignment-details.open {
+            display: block;
+        }
+        
+        .submission-preview {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-box {
+            border: 2px dashed #444;
+            padding: 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .upload-box:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(123, 104, 238, 0.05);
+        }
+        
+        .ocr-preview {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .ocr-preview > div {
+            flex: 1;
+        }
+        
+        .question-list {
+            margin-top: 1.5rem;
+        }
+        
+        .question-item {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lecture-archive.html" class="sidebar-link">
+                <i class="fas fa-book"></i> Lecture Archive
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="grades.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> My Performance
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Assignments</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="assignment-filter mb-3">
+                <div class="flex" style="gap: 1rem;">
+                    <select style="max-width: 200px;">
+                        <option>All Courses</option>
+                        <option>Data Structures & Algorithms</option>
+                        <option>Machine Learning Fundamentals</option>
+                        <option>Computer Networks</option>
+                    </select>
+                    <input type="text" placeholder="Search assignments..." style="max-width: 250px;">
+                </div>
+            </div>
+            
+            <div class="assignment-tabs">
+                <div class="assignment-tab active">Pending (2)</div>
+                <div class="assignment-tab">Submitted (3)</div>
+                <div class="assignment-tab">Graded (5)</div>
+                <div class="assignment-tab">All</div>
+            </div>
+            
+            <div class="assignment-list">
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Machine Learning: Backpropagation Implementation</h3>
+                            <p>Machine Learning Fundamentals | Due: June 18, 2023 (3 days left)</p>
+                        </div>
+                        <div class="badge warning">Pending</div>
+                    </div>
+                </div>
+                
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Data Structures: Implementing Dijkstra's Algorithm</h3>
+                            <p>Data Structures & Algorithms | Due: June 20, 2023 (5 days left)</p>
+                        </div>
+                        <div class="badge warning">Pending</div>
+                    </div>
+                    <div class="assignment-details open">
+                        <div class="mb-3">
+                            <h4>Assignment Details</h4>
+                            <p>In this assignment, you will implement Dijkstra's algorithm to find the shortest path in a weighted graph. You will need to create the necessary data structures and implement the algorithm efficiently.</p>
+                            
+                            <div style="margin: 1.5rem 0;">
+                                <h4>Grading Rubric</h4>
+                                <ul style="list-style: inside; padding-left: 1rem;">
+                                    <li>Correctness of implementation: 60%</li>
+                                    <li>Code efficiency and complexity: 20%</li>
+                                    <li>Documentation and code clarity: 10%</li>
+                                    <li>Test cases and edge case handling: 10%</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="submission-section">
+                            <h4>Submit Your Work</h4>
+                            <p class="mb-2">Upload a photo of your handwritten solution or submit as text.</p>
+                            
+                            <div class="upload-box">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                                <p>Drag and drop your images here or click to browse</p>
+                                <p style="font-size: 0.8rem; color: var(--secondary-text);">Supported formats: JPG, PNG, PDF</p>
+                            </div>
+                            
+                            <div class="ocr-preview mb-3">
+                                <div class="original-image">
+                                    <h5>Original Image</h5>
+                                    <div class="submission-preview" style="min-height: 200px; display: flex; justify-content: center; align-items: center;">
+                                        <p style="color: var(--secondary-text);">Your image will appear here</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="extracted-text">
+                                    <h5>Extracted Text <span style="color: var(--secondary-text); font-size: 0.8rem;">(Editable)</span></h5>
+                                    <div class="submission-preview" style="min-height: 200px;">
+                                        <textarea style="width: 100%; height: 180px; background: transparent; border: none; resize: none;" placeholder="Your OCR converted text will appear here. You can edit any mistakes."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="question-list">
+                                <h5>Assignment Questions</h5>
+                                <p class="mb-2">Your submission will be automatically segmented into questions. Review and edit if needed.</p>
+                                
+                                <div class="question-item">
+                                    <div class="question-header">
+                                        <h5>Question 1: Graph Implementation</h5>
+                                        <button class="btn secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Edit</button>
+                                    </div>
+                                    <div>
+                                        <p style="color: var(--secondary-text);">Your answer to Question 1 will appear here after OCR processing.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-item">
+                                    <div class="question-header">
+                                        <h5>Question 2: Dijkstra's Algorithm</h5>
+                                        <button class="btn secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Edit</button>
+                                    </div>
+                                    <div>
+                                        <p style="color: var(--secondary-text);">Your answer to Question 2 will appear here after OCR processing.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-item">
+                                    <div class="question-header">
+                                        <h5>Question 3: Time Complexity Analysis</h5>
+                                        <button class="btn secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Edit</button>
+                                    </div>
+                                    <div>
+                                        <p style="color: var(--secondary-text);">Your answer to Question 3 will appear here after OCR processing.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                                <button class="btn secondary">Save Draft</button>
+                                <button class="btn">Submit Assignment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Computer Networks: TCP/IP Protocol Analysis</h3>
+                            <p>Computer Networks | Submitted: June 5, 2023</p>
+                        </div>
+                        <div class="badge success">Graded: 85%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Learning Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I see you're working on the Dijkstra's Algorithm assignment. Do you have any questions about the requirements?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>What's the difference between Dijkstra's and Bellman-Ford algorithms?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>Dijkstra's algorithm finds the shortest path in a graph with non-negative weights, running in O(E log V) time with a priority queue.</p>
+                <p>Bellman-Ford works with negative weights too and can detect negative cycles, but runs slower at O(VE) time.</p>
+                <p>For this assignment, focus on Dijkstra's since all weights are positive.</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

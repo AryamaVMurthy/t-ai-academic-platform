@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .assignment-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .assignment-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .assignment-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .assignment-item {
+            margin-bottom: 1rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .assignment-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .assignment-details {
+            padding: 1.5rem;
+            border-top: 1px solid #333;
+            display: none;
+        }
+        
+        .assignment-details.open {
+            display: block;
+        }
+        
+        .rubric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .rubric-item:last-child {
+            border-bottom: none;
+        }
+        
+        .criteria-section {
+            background-color: rgba(123, 104, 238, 0.05);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .criteria-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .prompt-template {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lectures.html" class="sidebar-link">
+                <i class="fas fa-video"></i> Lectures
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <i class="fas fa-chart-line"></i> Analytics
+            </a>
+            <a href="grading.html" class="sidebar-link">
+                <i class="fas fa-check-circle"></i> Grading
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Assignments</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Professor profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="flex flex-between mb-3">
+                <div>
+                    <h2>Manage Assignments</h2>
+                </div>
+                <button class="btn">
+                    <i class="fas fa-plus"></i> Create New Assignment
+                </button>
+            </div>
+            
+            <div class="assignment-filter mb-3">
+                <div class="flex" style="gap: 1rem;">
+                    <select style="max-width: 200px;">
+                        <option>All Courses</option>
+                        <option>Data Structures & Algorithms</option>
+                        <option>Machine Learning Fundamentals</option>
+                        <option>Computer Networks</option>
+                    </select>
+                    <select style="max-width: 200px;">
+                        <option>All Status</option>
+                        <option>Draft</option>
+                        <option>Published</option>
+                        <option>Closed</option>
+                    </select>
+                    <input type="text" placeholder="Search assignments..." style="max-width: 250px;">
+                </div>
+            </div>
+            
+            <div class="assignment-tabs">
+                <div class="assignment-tab active">Active (3)</div>
+                <div class="assignment-tab">Upcoming (2)</div>
+                <div class="assignment-tab">Past (8)</div>
+                <div class="assignment-tab">Drafts (1)</div>
+                <div class="assignment-tab">All</div>
+            </div>
+            
+            <div class="assignment-list">
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Dijkstra's Algorithm</h3>
+                            <p>Data Structures & Algorithms | Due: June 20, 2023</p>
+                        </div>
+                        <div class="badge success">Active</div>
+                    </div>
+                    <div class="assignment-details open">
+                        <div class="grid grid-cols-2" style="gap: 2rem;">
+                            <div>
+                                <div class="mb-3">
+                                    <h4>Assignment Details</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <p><strong>Description:</strong> In this assignment, students will implement Dijkstra's algorithm to find the shortest path in a weighted graph. They will need to create the necessary data structures and implement the algorithm efficiently.</p>
+                                        <p style="margin-top: 1rem;"><strong>Status:</strong> Published on June 10, 2023</p>
+                                        <p><strong>Due Date:</strong> June 20, 2023, 11:59 PM</p>
+                                        <p><strong>Submissions:</strong> 27/45 (60%)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Rubric</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <div class="rubric-item">
+                                            <div>
+                                                <p><strong>Correctness of implementation</strong></p>
+                                                <p style="color: var(--secondary-text);">Algorithm correctly finds shortest paths</p>
+                                            </div>
+                                            <p>60%</p>
+                                        </div>
+                                        <div class="rubric-item">
+                                            <div>
+                                                <p><strong>Code efficiency and complexity</strong></p>
+                                                <p style="color: var(--secondary-text);">Optimal time and space complexity</p>
+                                            </div>
+                                            <p>20%</p>
+                                        </div>
+                                        <div class="rubric-item">
+                                            <div>
+                                                <p><strong>Documentation and code clarity</strong></p>
+                                                <p style="color: var(--secondary-text);">Clear variable names and comments</p>
+                                            </div>
+                                            <p>10%</p>
+                                        </div>
+                                        <div class="rubric-item">
+                                            <div>
+                                                <p><strong>Test cases and edge case handling</strong></p>
+                                                <p style="color: var(--secondary-text);">Comprehensive test coverage</p>
+                                            </div>
+                                            <p>10%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Assignment Materials</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <ul style="list-style: none;">
+                                            <li style="margin-bottom: 0.5rem;">
+                                                <div class="flex" style="align-items: center;">
+                                                    <i class="fas fa-file-pdf" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
+                                                    <span>Assignment_Instructions.pdf</span>
+                                                    <button class="btn secondary" style="padding: 0.25rem 0.75rem; margin-left: 1rem; font-size: 0.8rem;">View</button>
+                                                </div>
+                                            </li>
+                                            <li style="margin-bottom: 0.5rem;">
+                                                <div class="flex" style="align-items: center;">
+                                                    <i class="fas fa-file-code" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
+                                                    <span>Starter_Code.zip</span>
+                                                    <button class="btn secondary" style="padding: 0.25rem 0.75rem; margin-left: 1rem; font-size: 0.8rem;">View</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="flex" style="align-items: center;">
+                                                    <i class="fas fa-file-alt" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
+                                                    <span>Test_Cases.txt</span>
+                                                    <button class="btn secondary" style="padding: 0.25rem 0.75rem; margin-left: 1rem; font-size: 0.8rem;">View</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="mb-3">
+                                    <h4>Grading Configuration</h4>
+                                    <div class="criteria-section" style="margin-top: 1rem;">
+                                        <div class="criteria-header">
+                                            <h5>Grading Criteria</h5>
+                                            <button class="btn secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Edit</button>
+                                        </div>
+                                        <p><strong>Grading Model:</strong> Balanced (combination of strictness and leniency)</p>
+                                        <p><strong>AI Feedback Level:</strong> Detailed with improvement suggestions</p>
+                                        <p><strong>Auto-grading:</strong> Enabled (preliminary grades)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Grading Prompt Template</h4>
+                                    <div class="prompt-template" style="margin-top: 1rem;">
+                                        <p>You are an expert in data structures and algorithms, tasked with grading a student's implementation of Dijkstra's algorithm.</p>
+                                        <p>Evaluate the following aspects:</p>
+                                        <p>1. Correctness: Does the algorithm correctly find the shortest path? (60%)</p>
+                                        <p>2. Efficiency: Is the implementation optimal in time and space? (20%)</p>
+                                        <p>3. Clarity: Is the code well-documented and readable? (10%)</p>
+                                        <p>4. Test cases: Are edge cases properly handled? (10%)</p>
+                                        <p>Provide constructive feedback for improvement in each area.</p>
+                                    </div>
+                                    <button class="btn secondary" style="margin-top: 0.5rem;">Edit Prompt</button>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Reference Materials</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <ul style="list-style: none;">
+                                            <li style="margin-bottom: 0.5rem;">
+                                                <div class="flex" style="align-items: center;">
+                                                    <i class="fas fa-file-pdf" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
+                                                    <span>Lecture_Notes_Graph_Algorithms.pdf</span>
+                                                    <button class="btn secondary" style="padding: 0.25rem 0.75rem; margin-left: 1rem; font-size: 0.8rem;">View</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="flex" style="align-items: center;">
+                                                    <i class="fas fa-file-alt" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
+                                                    <span>Solution_Guide.txt</span>
+                                                    <button class="btn secondary" style="padding: 0.25rem 0.75rem; margin-left: 1rem; font-size: 0.8rem;">View</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn secondary" style="margin-top: 1rem;">Add Reference Material</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                            <button class="btn secondary">Send Reminder</button>
+                            <button class="btn secondary">View Submissions</button>
+                            <button class="btn">Edit Assignment</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Backpropagation Implementation</h3>
+                            <p>Machine Learning Fundamentals | Due: June 18, 2023</p>
+                        </div>
+                        <div class="badge success">Active</div>
+                    </div>
+                </div>
+                
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>TCP/IP Protocol Analysis</h3>
+                            <p>Computer Networks | Due: June 25, 2023</p>
+                        </div>
+                        <div class="badge success">Active</div>
+                    </div>
+                </div>
+                
+                <div class="assignment-item">
+                    <div class="assignment-header">
+                        <div>
+                            <h3>Advanced Sorting Algorithms</h3>
+                            <p>Data Structures & Algorithms | Draft</p>
+                        </div>
+                        <div class="badge warning">Draft</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <h3>Assignment Templates</h3>
+                <p class="mb-2">Use these templates to quickly create new assignments with predefined grading criteria.</p>
+                
+                <div class="grid grid-cols-3">
+                    <div class="card">
+                        <h4>Algorithm Implementation</h4>
+                        <p>Template for programming assignments focused on algorithm implementation.</p>
+                        <button class="btn secondary" style="margin-top: 1rem;">Use Template</button>
+                    </div>
+                    <div class="card">
+                        <h4>Research Paper</h4>
+                        <p>Template for written assignments with research and analysis components.</p>
+                        <button class="btn secondary" style="margin-top: 1rem;">Use Template</button>
+                    </div>
+                    <div class="card">
+                        <h4>Project Milestone</h4>
+                        <p>Template for evaluating project progress with multiple components.</p>
+                        <button class="btn secondary" style="margin-top: 1rem;">Use Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Teaching Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I've been analyzing the current submission rate for Dijkstra's Algorithm assignment. Based on past patterns, I predict you'll receive 80% of submissions by the deadline.</p>
+                <p>Would you like me to send an automated reminder to students who haven't submitted yet?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Yes, please send a reminder. Also, can you suggest improvements to the grading prompt?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I'll send the reminder to the 18 students who haven't submitted yet.</p>
+                <p>For the grading prompt, I suggest adding specific criteria for evaluating the priority queue implementation, as this was a common issue in previous assignments. Consider adding:</p>
+                <p>"Evaluate the choice of priority queue data structure. A binary heap or Fibonacci heap implementation should receive higher scores for efficiency."</p>
+                <p>Would you like me to update the prompt with this suggestion?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

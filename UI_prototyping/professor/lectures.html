@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectures - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .lecture-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .lecture-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .lecture-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .lecture-item {
+            margin-bottom: 1rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .lecture-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .lecture-details {
+            padding: 1.5rem;
+            border-top: 1px solid #333;
+            display: none;
+        }
+        
+        .lecture-details.open {
+            display: block;
+        }
+        
+        .transcript-section {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .correction-highlight {
+            background-color: rgba(255, 193, 7, 0.2);
+            padding: 0 2px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        
+        .slide-preview {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .status-pill {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: white;
+        }
+        
+        .status-pill.processing {
+            background-color: var(--warning-color);
+        }
+        
+        .status-pill.completed {
+            background-color: var(--success-color);
+        }
+        
+        .status-pill.scheduled {
+            background-color: var(--accent-color);
+        }
+        
+        .upload-box {
+            border: 2px dashed #444;
+            padding: 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .upload-box:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(123, 104, 238, 0.05);
+        }
+        
+        .segmentation-settings {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .segmentation-option {
+            flex: 1;
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .segmentation-option.active {
+            background-color: rgba(123, 104, 238, 0.1);
+            border: 1px solid var(--accent-color);
+        }
+        
+        .key-concept {
+            background-color: rgba(123, 104, 238, 0.05);
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-video"></i> Lectures
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <i class="fas fa-chart-line"></i> Analytics
+            </a>
+            <a href="grading.html" class="sidebar-link">
+                <i class="fas fa-check-circle"></i> Grading
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Lectures</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Professor profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="flex flex-between mb-3">
+                <div>
+                    <h2>Manage Lectures</h2>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn secondary">
+                        <i class="fas fa-calendar-plus"></i> Schedule Recording
+                    </button>
+                    <button class="btn">
+                        <i class="fas fa-upload"></i> Upload Recording
+                    </button>
+                </div>
+            </div>
+            
+            <div class="lecture-filter mb-3">
+                <div class="flex" style="gap: 1rem;">
+                    <select style="max-width: 200px;">
+                        <option>All Courses</option>
+                        <option>Data Structures & Algorithms</option>
+                        <option>Machine Learning Fundamentals</option>
+                        <option>Computer Networks</option>
+                    </select>
+                    <select style="max-width: 200px;">
+                        <option>All Status</option>
+                        <option>Scheduled</option>
+                        <option>Processing</option>
+                        <option>Complete</option>
+                    </select>
+                    <input type="text" placeholder="Search lectures..." style="max-width: 250px;">
+                </div>
+            </div>
+            
+            <div class="lecture-tabs">
+                <div class="lecture-tab active">Recent</div>
+                <div class="lecture-tab">Scheduled</div>
+                <div class="lecture-tab">Processing</div>
+                <div class="lecture-tab">Archived</div>
+                <div class="lecture-tab">All</div>
+            </div>
+            
+            <div class="lecture-list">
+                <div class="lecture-item">
+                    <div class="lecture-header">
+                        <div>
+                            <h3>Neural Networks</h3>
+                            <p>Machine Learning Fundamentals | Recorded: June 12, 2023</p>
+                        </div>
+                        <div class="status-pill completed">Completed</div>
+                    </div>
+                    <div class="lecture-details open">
+                        <div class="grid grid-cols-2" style="gap: 2rem;">
+                            <div>
+                                <div class="mb-3">
+                                    <h4>Lecture Details</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <p><strong>Course:</strong> Machine Learning Fundamentals</p>
+                                        <p><strong>Recording Date:</strong> June 12, 2023, 10:00 AM - 11:30 AM</p>
+                                        <p><strong>Duration:</strong> 90 minutes</p>
+                                        <p><strong>Processing Status:</strong> Completed</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Lecture Recording</h4>
+                                    <div style="margin-top: 1rem; position: relative;">
+                                        <img src="https://via.placeholder.com/800x450" alt="Lecture video thumbnail" style="width: 100%; border-radius: var(--border-radius);">
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                            <button class="btn" style="width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                                                <i class="fas fa-play" style="font-size: 1.5rem;"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                                        <button class="btn secondary">Download Recording</button>
+                                        <button class="btn secondary">Share Link</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Generated Content</h4>
+                                    <div style="margin-top: 1rem;" class="grid grid-cols-2">
+                                        <div class="card">
+                                            <div class="flex mb-1">
+                                                <i class="fas fa-file-alt" style="margin-right: 10px; color: var(--accent-color);"></i>
+                                                <h5>Lecture Notes</h5>
+                                            </div>
+                                            <p>24 pages of notes generated from the lecture</p>
+                                            <button class="btn secondary mt-2" style="width: 100%;">View Notes</button>
+                                        </div>
+                                        <div class="card">
+                                            <div class="flex mb-1">
+                                                <i class="fas fa-file-powerpoint" style="margin-right: 10px; color: var(--accent-color);"></i>
+                                                <h5>Slides</h5>
+                                            </div>
+                                            <p>18 slides generated from the lecture content</p>
+                                            <button class="btn secondary mt-2" style="width: 100%;">View Slides</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="mb-3">
+                                    <div class="flex flex-between">
+                                        <h4>Transcript Review</h4>
+                                        <button class="btn secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem;">Edit Full Transcript</button>
+                                    </div>
+                                    <p class="mb-2" style="color: var(--secondary-text);">Review and correct the machine-generated transcript. Yellow highlights indicate potential errors.</p>
+                                    <div class="transcript-section">
+                                        <p>Now let's explore neural networks. Neural networks are computational models inspired by the human brain. They consist of layers of <span class="correction-highlight">noorons</span>, which process input data and pass it through the network.</p>
+                                        <p>The key components of a neural network include:</p>
+                                        <p>- Input Layer: Where data enters the network</p>
+                                        <p>- Hidden Layers: Where most of the processing happens</p>
+                                        <p>- Output Layer: Where the final result is produced</p>
+                                        <p>- Weights: Parameters that determine the strength of connections</p>
+                                        <p>- <span class="correction-highlight">Activiation</span> Functions: Functions that introduce non-linearity</p>
+                                        <p>When training a neural network, we use a process called <span class="correction-highlight">backpropegation</span>, which calculates the gradients of the error with respect to the weights. We then use these gradients to update the weights using an optimization algorithm like gradient descent.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Key Concepts Identified</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <div class="key-concept">
+                                            <div class="flex flex-between mb-1">
+                                                <strong>Neural Network Architecture</strong>
+                                                <button class="btn secondary" style="padding: 0.25rem 0.5rem; font-size: 0.7rem;">Edit</button>
+                                            </div>
+                                            <p>The structure of neural networks including input, hidden, and output layers</p>
+                                        </div>
+                                        <div class="key-concept">
+                                            <div class="flex flex-between mb-1">
+                                                <strong>Backpropagation</strong>
+                                                <button class="btn secondary" style="padding: 0.25rem 0.5rem; font-size: 0.7rem;">Edit</button>
+                                            </div>
+                                            <p>Algorithm for training neural networks by calculating gradients and updating weights</p>
+                                        </div>
+                                        <div class="key-concept">
+                                            <div class="flex flex-between mb-1">
+                                                <strong>Activation Functions</strong>
+                                                <button class="btn secondary" style="padding: 0.25rem 0.5rem; font-size: 0.7rem;">Edit</button>
+                                            </div>
+                                            <p>Functions that determine the output of a neural network node</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn secondary" style="margin-top: 1rem;">Add Key Concept</button>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <h4>Publishing Options</h4>
+                                    <div style="margin-top: 1rem;">
+                                        <div class="card">
+                                            <h5 class="mb-2">Student Access</h5>
+                                            <div class="flex mb-2" style="gap: 1rem;">
+                                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <input type="checkbox" checked>
+                                                    <span>Lecture Recording</span>
+                                                </label>
+                                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <input type="checkbox" checked>
+                                                    <span>Generated Notes</span>
+                                                </label>
+                                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                                    <input type="checkbox" checked>
+                                                    <span>Generated Slides</span>
+                                                </label>
+                                            </div>
+                                            <p style="color: var(--secondary-text); font-size: 0.9rem;">Published to students on June 12, 2023, 2:30 PM</p>
+                                            <button class="btn secondary" style="margin-top: 0.5rem;">Update Access</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lecture-item">
+                    <div class="lecture-header">
+                        <div>
+                            <h3>Graph Algorithms</h3>
+                            <p>Data Structures & Algorithms | Recorded: June 10, 2023</p>
+                        </div>
+                        <div class="status-pill completed">Completed</div>
+                    </div>
+                </div>
+                
+                <div class="lecture-item">
+                    <div class="lecture-header">
+                        <div>
+                            <h3>TCP/IP Protocol</h3>
+                            <p>Computer Networks | Recorded: June 8, 2023</p>
+                        </div>
+                        <div class="status-pill processing">Processing</div>
+                    </div>
+                </div>
+                
+                <div class="lecture-item">
+                    <div class="lecture-header">
+                        <div>
+                            <h3>Advanced Sorting Algorithms</h3>
+                            <p>Data Structures & Algorithms | Scheduled: June 15, 2023</p>
+                        </div>
+                        <div class="status-pill scheduled">Scheduled</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="upload-section mt-4">
+                <div class="card">
+                    <h3>Upload New Lecture</h3>
+                    <p class="mb-3">Upload a lecture recording to automatically generate transcripts, notes, and slides.</p>
+                    
+                    <div class="upload-box">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                        <p>Drag and drop your recording here or click to browse</p>
+                        <p style="font-size: 0.8rem; color: var(--secondary-text);">Supported formats: MP4, MOV, AVI, MKV</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="lecture-title" style="display: block; margin-bottom: 0.5rem;">Lecture Title</label>
+                        <input type="text" id="lecture-title" placeholder="Enter lecture title">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="course-select" style="display: block; margin-bottom: 0.5rem;">Course</label>
+                        <select id="course-select">
+                            <option>Select course</option>
+                            <option>Data Structures & Algorithms</option>
+                            <option>Machine Learning Fundamentals</option>
+                            <option>Computer Networks</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h4>Content Generation Settings</h4>
+                        <div class="segmentation-settings" style="margin-top: 1rem;">
+                            <div class="segmentation-option active">
+                                <i class="fas fa-layer-group" style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 0.5rem;"></i>
+                                <h5>Topic-based Segmentation</h5>
+                                <p style="font-size: 0.8rem; color: var(--secondary-text);">Segments the lecture by topic changes</p>
+                            </div>
+                            <div class="segmentation-option">
+                                <i class="fas fa-clock" style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 0.5rem;"></i>
+                                <h5>Time-based Segmentation</h5>
+                                <p style="font-size: 0.8rem; color: var(--secondary-text);">Segments the lecture by time intervals</p>
+                            </div>
+                            <div class="segmentation-option">
+                                <i class="fas fa-sliders-h" style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 0.5rem;"></i>
+                                <h5>Custom Segmentation</h5>
+                                <p style="font-size: 0.8rem; color: var(--secondary-text);">Manually define lecture segments</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                        <button class="btn secondary">Cancel</button>
+                        <button class="btn">Upload & Process</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Teaching Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I've noticed some potential errors in the Neural Networks transcript. Would you like me to automatically correct the misspellings?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Yes, please fix those errors. Also, are there any key concepts missing from the auto-generated list?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I've fixed the following errors:</p>
+                <ul style="list-style: inside; padding-left: 10px;">
+                    <li>"noorons" → "neurons"</li>
+                    <li>"activiation" → "activation"</li>
+                    <li>"backpropegation" → "backpropagation"</li>
+                </ul>
+                <p>I've also analyzed the transcript and found one additional key concept that might be worth adding:</p>
+                <p><strong>Loss Functions</strong>: Metrics that quantify the error between predicted outputs and actual values, which are essential for neural network training.</p>
+                <p>Would you like me to add this to the key concepts list?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="lecture-archive.html" class="sidebar-link">
+                <i class="fas fa-book"></i> Lecture Archive
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="grades.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> My Performance
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Dashboard</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="welcome-section mb-3">
+                <div class="card">
+                    <div class="flex flex-between">
+                        <div>
+                            <h2>Welcome back, Alex!</h2>
+                            <p>You have 2 pending assignments and 1 recent grade update.</p>
+                        </div>
+                        <button class="btn">View Calendar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-section mb-3">
+                <h3>Course Overview</h3>
+                <div class="grid grid-cols-3">
+                    <div class="card">
+                        <h4>Data Structures & Algorithms</h4>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 85%;"></div>
+                        </div>
+                        <div class="flex flex-between">
+                            <p>Overall: 85%</p>
+                            <span class="badge success">Excellent</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>Machine Learning Fundamentals</h4>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 72%;"></div>
+                        </div>
+                        <div class="flex flex-between">
+                            <p>Overall: 72%</p>
+                            <span class="badge success">Good</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>Computer Networks</h4>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 68%;"></div>
+                        </div>
+                        <div class="flex flex-between">
+                            <p>Overall: 68%</p>
+                            <span class="badge warning">Average</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-lectures-section mb-3">
+                <div class="flex flex-between mb-2">
+                    <h3>Recent Lecture Content</h3>
+                    <a href="lecture-archive.html">View All</a>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="card">
+                        <div class="flex mb-1">
+                            <i class="fas fa-video mr-2" style="margin-right: 10px;"></i>
+                            <h4>Machine Learning: Neural Networks</h4>
+                        </div>
+                        <p>Date: June 12, 2023</p>
+                        <p>Duration: 90 minutes</p>
+                        <div class="flex" style="gap: 10px; margin-top: 10px;">
+                            <button class="btn">View Notes</button>
+                            <button class="btn secondary">Download Slides</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="flex mb-1">
+                            <i class="fas fa-video mr-2" style="margin-right: 10px;"></i>
+                            <h4>Data Structures: Graph Algorithms</h4>
+                        </div>
+                        <p>Date: June 10, 2023</p>
+                        <p>Duration: 75 minutes</p>
+                        <div class="flex" style="gap: 10px; margin-top: 10px;">
+                            <button class="btn">View Notes</button>
+                            <button class="btn secondary">Download Slides</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pending-assignments-section mb-3">
+                <div class="flex flex-between mb-2">
+                    <h3>Pending Assignments</h3>
+                    <a href="assignments.html">View All</a>
+                </div>
+                <div class="grid grid-cols-1">
+                    <div class="card">
+                        <div class="flex flex-between">
+                            <div>
+                                <h4>Machine Learning: Backpropagation Implementation</h4>
+                                <p>Due: June 18, 2023 (3 days left)</p>
+                            </div>
+                            <span class="badge warning">Pending</span>
+                        </div>
+                        <div class="flex" style="gap: 10px; margin-top: 15px;">
+                            <button class="btn">Start Assignment</button>
+                            <button class="btn secondary">View Details</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="flex flex-between">
+                            <div>
+                                <h4>Data Structures: Implementing Dijkstra's Algorithm</h4>
+                                <p>Due: June 20, 2023 (5 days left)</p>
+                            </div>
+                            <span class="badge warning">Pending</span>
+                        </div>
+                        <div class="flex" style="gap: 10px; margin-top: 15px;">
+                            <button class="btn">Start Assignment</button>
+                            <button class="btn secondary">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Learning Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>Hi Alex! How can I help you today? You can ask me about lecture content, assignments, or your performance.</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>Can you explain backpropagation in neural networks?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>Backpropagation is an algorithm used to train neural networks. It works by calculating the gradient of the loss function with respect to each weight by the chain rule, computing the gradient layer by layer, iterating backwards from the last layer.</p>
+                <p>Would you like more detailed information or specific examples from your last lecture?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 

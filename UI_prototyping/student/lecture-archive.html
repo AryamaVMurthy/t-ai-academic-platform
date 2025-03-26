@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Archive - T-AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .lecture-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-item {
+            flex: 1;
+        }
+        
+        .lecture-tabs {
+            display: flex;
+            border-bottom: 1px solid #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lecture-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .lecture-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .lecture-content-split {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .lecture-content-split > div {
+            flex: 1;
+        }
+        
+        .lecture-note {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background-color: rgba(123, 104, 238, 0.05);
+        }
+        
+        .lecture-note.highlight {
+            background-color: rgba(123, 104, 238, 0.1);
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .transcript {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .slide-preview {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .slide-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="navbar-brand mb-3">T-AI</div>
+        <nav>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="#" class="sidebar-link active">
+                <i class="fas fa-book"></i> Lecture Archive
+            </a>
+            <a href="assignments.html" class="sidebar-link">
+                <i class="fas fa-tasks"></i> Assignments
+            </a>
+            <a href="grades.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> My Performance
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="../index.html" class="sidebar-link">
+                <i class="fas fa-sign-out-alt"></i> Log Out
+            </a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="navbar">
+                <h1>Lecture Archive</h1>
+                <div class="navbar-links">
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="User profile" style="border-radius: 50%; width: 40px; height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="lecture-filter">
+                <div class="filter-item">
+                    <select>
+                        <option>All Courses</option>
+                        <option>Data Structures & Algorithms</option>
+                        <option>Machine Learning Fundamentals</option>
+                        <option>Computer Networks</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <select>
+                        <option>Recent First</option>
+                        <option>Oldest First</option>
+                        <option>By Topic</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <input type="text" placeholder="Search lectures...">
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h2>Machine Learning: Neural Networks</h2>
+                <p>Professor: Dr. Sarah Johnson</p>
+                <p>Date: June 12, 2023</p>
+                <p>Duration: 90 minutes</p>
+                
+                <div class="lecture-tabs">
+                    <div class="lecture-tab active">Notes & Slides</div>
+                    <div class="lecture-tab">Transcript</div>
+                    <div class="lecture-tab">Resources</div>
+                </div>
+                
+                <div class="lecture-content">
+                    <div class="lecture-content-split">
+                        <div class="transcript">
+                            <h3>Lecture Notes</h3>
+                            <div class="lecture-note">
+                                <h4>Introduction to Neural Networks</h4>
+                                <p>Neural networks are a set of algorithms, modeled loosely after the human brain, that are designed to recognize patterns.</p>
+                            </div>
+                            <div class="lecture-note highlight">
+                                <h4>Key Components</h4>
+                                <p>Input Layer, Hidden Layers, Output Layer, Weights, Activation Functions, and Loss Functions.</p>
+                            </div>
+                            <div class="lecture-note">
+                                <h4>Forward Propagation</h4>
+                                <p>Process where input data is passed through the neural network to get an output.</p>
+                            </div>
+                            <div class="lecture-note highlight">
+                                <h4>Backpropagation</h4>
+                                <p>Algorithm used to train neural networks by calculating gradients and updating weights to minimize loss.</p>
+                                <ul style="list-style: inside; padding-left: 1rem;">
+                                    <li>Calculate error/loss at output</li>
+                                    <li>Compute gradients using chain rule</li>
+                                    <li>Update weights backwards through network</li>
+                                </ul>
+                            </div>
+                            <div class="lecture-note">
+                                <h4>Activation Functions</h4>
+                                <p>ReLU, Sigmoid, Tanh, and Softmax functions and their use cases.</p>
+                            </div>
+                            <div class="lecture-note">
+                                <h4>Training Process</h4>
+                                <p>Batch sizes, epochs, learning rates, and optimization algorithms.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slides">
+                            <h3>Lecture Slides</h3>
+                            <div class="slide-preview">
+                                <img src="https://via.placeholder.com/400x300" alt="Slide preview" style="width: 100%; max-width: 400px;">
+                                <p>Slide 8: Backpropagation Process</p>
+                            </div>
+                            <div class="slide-controls">
+                                <button class="btn secondary"><i class="fas fa-arrow-left"></i> Previous</button>
+                                <span>Slide 8 of 24</span>
+                                <button class="btn secondary">Next <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <button class="btn">Download All Slides</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3>Key Concepts</h3>
+                        <div class="grid grid-cols-3">
+                            <div class="card">
+                                <h4>Neural Network Architecture</h4>
+                                <p>The structure and layers of a neural network.</p>
+                                <a href="#">Related resources →</a>
+                            </div>
+                            <div class="card">
+                                <h4>Backpropagation</h4>
+                                <p>The algorithm used to train neural networks.</p>
+                                <a href="#">Related resources →</a>
+                            </div>
+                            <div class="card">
+                                <h4>Activation Functions</h4>
+                                <p>Functions that determine the output of a neural network node.</p>
+                                <a href="#">Related resources →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-lectures mb-3">
+                <h3>More Lectures in This Course</h3>
+                <div class="grid grid-cols-3">
+                    <div class="card">
+                        <h4>Machine Learning: Introduction to CNNs</h4>
+                        <p>Date: June 5, 2023</p>
+                        <button class="btn secondary">View Lecture</button>
+                    </div>
+                    <div class="card">
+                        <h4>Machine Learning: Decision Trees</h4>
+                        <p>Date: May 29, 2023</p>
+                        <button class="btn secondary">View Lecture</button>
+                    </div>
+                    <div class="card">
+                        <h4>Machine Learning: Linear Regression</h4>
+                        <p>Date: May 22, 2023</p>
+                        <button class="btn secondary">View Lecture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Learning Assistant</h3>
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>I see you're viewing the Neural Networks lecture. Do you have any questions about the content?</p>
+            </div>
+            <div class="message user" style="background-color: var(--secondary-bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; margin-left: auto; max-width: 80%; text-align: right;">
+                <p>What's the difference between ReLU and sigmoid activation?</p>
+            </div>
+            <div class="message system" style="background-color: rgba(123, 104, 238, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <p>ReLU (Rectified Linear Unit) outputs the input directly if positive, otherwise 0. It's computationally efficient and helps with vanishing gradient problems.</p>
+                <p>Sigmoid squishes values between 0 and 1, making it useful for binary classification but prone to vanishing gradients for deep networks.</p>
+                <p>Would you like to see examples from the lecture?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+</body>
+</html> 
